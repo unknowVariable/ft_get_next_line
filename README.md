@@ -1,19 +1,19 @@
-# Projet get_next_line
+# Project get_next_line
 
 ## Description
 
-Le projet get_next_line consiste en une fonction en langage C qui permet de lire une ligne depuis un descripteur de fichier donné (comme un fichier, un terminal, ou même une connexion réseau) et de la renvoyer à chaque appel de la fonction. L'objectif est de réaliser cette fonction de manière efficace, en utilisant un minimum de ressources, et en permettant une utilisation aisée dans d'autres programmes.
+The get_next_line project consists of a function in C that reads a line from a given file descriptor (such as a file, terminal, or even a network connection) and returns it with each function call. The aim is to implement this function efficiently, using minimal resources, and allowing for easy integration into other programs.
 
-## Fonctionnalités
+## Features
 
-- Lecture de lignes depuis un descripteur de fichier
-- Gestion des différents caractères de fin de ligne (newline)
-- Possibilité de lire des fichiers de taille quelconque, ligne par ligne
-- Gestion des cas particuliers comme les fichiers vides ou les fins de fichier
+- Reads lines from a file descriptor
+- Handles different end-of-line characters (newline)
+- Capable of reading files of any size, line by line
+- Manages special cases such as empty files or end-of-file situations
 
-## Utilisation
+## Usage
 
-Pour utiliser la fonction get_next_line dans votre programme, vous devez inclure le fichier header correspondant et compiler votre code avec la fonction get_next_line. Voici un exemple minimal d'utilisation :
+To use the get_next_line function in your program, you need to include the corresponding header file and compile your code with the get_next_line function. Here is a minimal example of usage:
 
 ```c
 #include "get_next_line.h"
@@ -29,22 +29,21 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    // Ouvre le fichier en lecture seule
+    // Open the file in read-only mode
     fd = open(argv[1], O_RDONLY);
-    // -1 en cas de probleme
+    // -1 in case of an error
     if (fd == -1)
     {
         perror("Error opening file");
         return 1;
     }
-    // Recupere la ligne suivante a chaque appel
+    // Retrieve the next line with each call
     while ((line = get_next_line(fd)) != NULL)
     {
         printf("%s\n", line);
         free(line);  
     }
-    // Ferme de descripteur 
+    // Close the file descriptor
     close(fd); 
     return 0;
 }
-
